@@ -9,7 +9,8 @@
 import React, { useEffect } from 'react'
 import {
   View,
-  BackHandler
+  BackHandler,
+  StyleSheet
 } from 'react-native'
 import { RootSiblingParent } from 'react-native-root-siblings'
 
@@ -37,13 +38,10 @@ const App = () => {
 
     return true
   }
-  
+
   return (
     <RootSiblingParent>
-      <View style={{
-        width: "100%",
-        height: "100%"
-      }}>
+      <View style={styles.full_size}>
         <AppNavigator
           ref={navigatorRef => {
             NavigationService.setTopLevelNavigator(navigatorRef);
@@ -53,5 +51,12 @@ const App = () => {
     </RootSiblingParent>
   )
 }
+
+const styles = StyleSheet.create({
+  full_size: {
+    width: '100%',
+    height: '100%'
+  }
+})
 
 export default App

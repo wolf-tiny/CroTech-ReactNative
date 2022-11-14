@@ -4,7 +4,8 @@ import {
   TextInput,
   Image,
   View,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native'
 import { requestGet } from '../../utils/APIUtils'
 import { API_APPLE_MISIC_URL } from '../../constants/Constants'
@@ -70,36 +71,15 @@ const MainScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{
-      width: "100%",
-      height: "100%",
-      backgroundColor: '#eeeeee',
-      alignSelf: 'center'
-    }}>
-      <View style={{
-        width: "90%",
-        margin: 20,
-        borderWidth: 1,
-        borderColor: 'tomato',
-        display: 'flex',
-        flexDirection: 'row',
-        borderRadius: 30
-      }}>
+    <SafeAreaView style={styles.full_size}>
+      <View style={styles.full_under_size}>
         <Image
-          style={{
-            width: 30,
-            height: '100%',
-            marginStart: 10,
-            resizeMode: 'center'
-          }}
+          style={styles.search_img}
           source={require('../../../res/search.png')}
         />
         <TextInput
           placeholder='search'
-          style={{
-            width: "100%",
-            paddingStart: 10
-          }}
+          style={styles.search_input}
           value={search}
           onChangeText={(text) => {
             setSearch(text)
@@ -111,14 +91,8 @@ const MainScreen = () => {
       </View>
       <ScrollView
         showsVerticalScrollIndicator={true}
-        style={{
-          width: '100%',
-          marginBottom: 20
-        }}>
-        <View style={{
-          width: "90%",
-          marginHorizontal: 20,
-        }}>
+        style={styles.scroll_size}>
+        <View style={styles.scroll_under_size}>
           {list.map((item, index) => {
             return <MainItem key={index} detail={item} />
           })}
@@ -127,5 +101,41 @@ const MainScreen = () => {
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  full_size: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: '#eeeeee',
+    alignSelf: 'center'
+  },
+  full_under_size: {
+    width: "90%",
+    margin: 20,
+    borderWidth: 1,
+    borderColor: 'tomato',
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 30
+  },
+  search_img: {
+    width: 30,
+    height: '100%',
+    marginStart: 10,
+    resizeMode: 'center'
+  },
+  search_input: {
+    width: "100%",
+    paddingStart: 10
+  },
+  scroll_size: {
+    width: '100%',
+    marginBottom: 20
+  },
+  scroll_under_size: {
+    width: "90%",
+    marginHorizontal: 20,
+  }
+})
 
 export default MainScreen
