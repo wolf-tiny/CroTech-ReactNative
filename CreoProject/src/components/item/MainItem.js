@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Text,
   View,
@@ -7,7 +7,6 @@ import {
   StyleSheet
 } from 'react-native'
 
-import TextTicker from 'react-native-text-ticker'
 import SoundPlayer from 'react-native-sound-player'
 
 const MainItem = ({ detail }) => {
@@ -29,21 +28,6 @@ const MainItem = ({ detail }) => {
           source={{ uri: detail.artworkUrl100 }} />
       </View>
       <View style={styles.item_text_view}>
-        {/* <TextTicker
-          duration={10000}
-          loop
-          bounce
-          repeatSpacer={50}
-          marqueeDelay={1000}
-          style={{
-            color: 'black',
-            fontWeight: 'bold',
-            fontSize: 14,
-            marginTop: 20,
-            marginBottom: 10
-          }}>
-          {detail.collectionName}
-        </TextTicker> */}
         <Text
           numberOfLines={1}
           lineBreakMode
