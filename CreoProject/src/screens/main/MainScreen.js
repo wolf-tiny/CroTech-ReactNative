@@ -11,33 +11,35 @@ import { requestGet } from '../../utils/APIUtils'
 import { API_APPLE_MISIC_URL } from '../../constants/Constants'
 
 import MainItem from '../../components/item/MainItem'
+import LabelItem from '../../components/item/LabelItem'
+
+const emptyArray = [{ name: 'A' }, { name: "B" }, { name: "C" }, { name: "D" }, { name: "E" }]
 
 const MainScreen = () => {
 
-  const [list, setList] = useState([])
-  const [search, setSearch] = useState('radioHead')
+  const [list, setList] = useState(emptyArray)
+  const [search, setSearch] = useState('')
   const [second, setSecond] = useState(0)
 
   useEffect(() => {
     getList()
 
     const timer = setInterval(() => {
-      setSecond((second) => second + 1)
+      setSecond(content => content + 1)
     }, 1000)
 
     return () => clearInterval(timer)
   }, [])
 
   useEffect(() => {
-    if (list.length !== 0) {
-      setList(list.slice(1).concat(list[0]))
-    }
+    setList(content => content.slice(1).concat(content[0]))
   }, [second])
 
   const getList = () => {
-    if (list.length !== 0) {
-      setList([])
+    if (list.length !== 5) {
+      setList(content => content.filter(item => item.name !== undefined))
     }
+    
     if (search === '') {
       return
     }
@@ -66,7 +68,7 @@ const MainScreen = () => {
           return acc;
         }
       }, []);
-      setList(filteredArr)
+      setList(content => content.concat(filteredArr))
     })
   }
 
@@ -94,7 +96,9 @@ const MainScreen = () => {
         style={styles.scroll_size}>
         <View style={styles.scroll_under_size}>
           {list.map((item, index) => {
-            return <MainItem key={index} detail={item} />
+            return item.name !== undefined ?
+              <LabelItem key={index} detail={item.name} /> :
+              <MainItem key={index} detail={item} />
           })}
         </View>
       </ScrollView>
