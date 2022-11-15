@@ -96,7 +96,7 @@ const MainScreen = () => {
         style={styles.scroll_size}>
         <View style={styles.scroll_under_size}>
           {list.map((item, index) => {
-            return item.name !== undefined ?
+            return index > 4 ? <View key={index}></View> : item.name !== undefined ?
               <LabelItem key={index} detail={item.name} /> :
               <MainItem key={index} detail={item} />
           })}
