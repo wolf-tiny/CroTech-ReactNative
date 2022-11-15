@@ -68,7 +68,7 @@ const MainScreen = () => {
           return acc;
         }
       }, []);
-      setList(content => content.concat(filteredArr))
+      setList(content => tempList.length !== 0 ? content.concat(filteredArr.slice(0, 5)) : content)
     })
   }
 
@@ -133,8 +133,7 @@ const styles = StyleSheet.create({
     paddingStart: 10
   },
   scroll_size: {
-    width: '100%',
-    marginBottom: 20
+    width: '100%'
   },
   scroll_under_size: {
     width: "90%",
